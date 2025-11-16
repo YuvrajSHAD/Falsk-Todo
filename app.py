@@ -8,7 +8,10 @@ from bson.objectid import ObjectId
 import os
 
 app = Flask(__name__, instance_relative_config=True)
-app.config.from_pyfile('config.py')
+app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
+app.config['MONGO_URI'] = os.environ['MONGO_URI']
+app.config['MAIL_USERNAME'] = os.environ['MAIL_USERNAME']
+app.config['MAIL_PASSWORD'] = os.environ['MAIL_PASSWORD']
 
 # Initialize Flask extensions
 mongo = PyMongo(app)
