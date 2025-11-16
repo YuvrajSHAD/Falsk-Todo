@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Login/Register | Todo App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2 id="form-title">Login</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <form id="auth-form" method="POST" action="{{ url_for('auth.login') }}">
+            <div class="form-fields">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <input type="hidden" id="form-action" name="action" value="login">
+                <button type="submit" id="form-submit-btn">Login</button>
+            </div>
+        </form>
+        <p>
+            <span id="toggle-text">Don't have an account?</span>
+            <a href="#" id="toggle-link">Register here</a>
+        </p>
+    </div>
+    <script>
+        const formTitle = document.getElementById('form-title');
+        const formAction = document.getElementById('form-action');
+        const formSubmitBtn = document.getElementById('form-submit-btn');
+        const toggleText = document.getElementById('toggle-text');
+        const toggleLink = document.getElementById('toggle-link');
+        toggleLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if(formAction.value === 'login') {
+                formTitle.textContent = 'Register';
+                formSubmitBtn.textContent = 'Register';
+                formAction.value = 'register';
+                toggleText.textContent = 'Already have an account?';
+                toggleLink.textContent = 'Login here';
+            } else {
+                formTitle.textContent = 'Login';
+                formSubmitBtn.textContent = 'Login';
+                formAction.value = 'login';
+                toggleText.textContent = "Don't have an account?";
+                toggleLink.textContent = 'Register here';
+            }
+        });
+    </script>
+</body>
+</html>

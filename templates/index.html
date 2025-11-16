@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Spiral Notebook | Todo App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="notebook">
+        <div class="page profile-page" data-page="1">
+            <div class="profile-header">
+                <h2>Profile</h2>
+            </div>
+            <div class="profile-content">
+                <div class="profile-label">Logged in as:</div>
+                <div class="profile-email">{{ email }}</div>
+                <!-- Optionally add avatar, stats, etc. here -->
+            </div>
+        </div>
+        <div class="spiral">
+            <div class="spiral-rings">
+                <div class="spiral-ring"></div>
+                <div class="spiral-ring"></div>
+                <div class="spiral-ring"></div>
+                <div class="spiral-ring"></div>
+                <div class="spiral-ring"></div>
+                <div class="spiral-ring"></div>
+                <div class="spiral-ring"></div>
+                <div class="spiral-ring"></div>
+                <div class="spiral-ring"></div>
+                <div class="spiral-ring"></div>
+            </div>
+        </div>
+        <div class="page tasks-page" data-page="2">
+            <div class="tasks-header">
+                <h2>Tasks</h2>
+            </div>
+            <div class="tasks-lines">
+                <!-- Lines created via CSS background, tasks will be absolutely positioned here -->
+            </div>
+        </div>
+    </div>
+    <div class="task-entry-area">
+        <input id="new-task-input" placeholder="Enter a new goal/task and press Enter" />
+        <button id="add-task-btn">Add Task</button>
+    </div>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
