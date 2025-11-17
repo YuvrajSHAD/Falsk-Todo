@@ -1,4 +1,5 @@
 blinker==1.9.0
+certifi==2025.11.12
 click==8.3.1
 colorama==0.4.6
 dnspython==2.8.0
@@ -16,6 +17,10 @@ Jinja2==3.1.6
 MarkupSafe==3.0.3
 packaging==25.0
 pymongo==4.15.4
+python-dateutil==2.9.0.post0
+sib-api-v3-sdk==7.6.0
+six==1.17.0
 SQLAlchemy==2.0.44
 typing_extensions==4.15.0
+urllib3==2.5.0
 Werkzeug==3.1.3
