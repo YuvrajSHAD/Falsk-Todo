@@ -1,8 +1,7 @@
 from app import app
+from asgiref.wsgi import WsgiToAsgi
 
-async def handler(request, response):
-    # Vercel serverless Python expects an async handler
-    # Adapt Flask WSGI to ASGI using `asgiref`
-    from asgiref.wsgi import WsgiToAsgi
-    asgi_app = WsgiToAsgi(app)
-    return await asgi_app(request.scope, request.receive, response.send)
+asgi_app = WsgiToAsgi(app)
+
+async def handler(scope, receive, send):
+    await asgi_app(scope, receive, send)
