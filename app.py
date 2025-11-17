@@ -1,6 +1,5 @@
 from flask import Flask, redirect, url_for, Blueprint, request, jsonify, render_template
 from flask_login import LoginManager, login_required, current_user, UserMixin
-from flask_mail import Mail
 from flask_pymongo import PyMongo
 from datetime import timedelta
 from auth import auth_bp
@@ -10,12 +9,9 @@ import os
 app = Flask(__name__, instance_relative_config=True)
 app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 app.config['MONGO_URI'] = os.environ['MONGO_URI']
-app.config['MAIL_USERNAME'] = os.environ['MAIL_USERNAME']
-app.config['MAIL_PASSWORD'] = os.environ['MAIL_PASSWORD']
 
 # Initialize Flask extensions
 mongo = PyMongo(app)
-mail = Mail(app)
 
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
