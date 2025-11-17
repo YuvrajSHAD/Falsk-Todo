@@ -8,8 +8,7 @@ auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    # Import here to avoid circular import error
-    from app import mongo, mail
+    from app import mongo  # Avoid circular import
 
     if request.method == 'POST':
         action = request.form.get('action')
@@ -35,7 +34,7 @@ def login():
             {'$set': {'otp': otp, 'otp_expiry': otp_expiry}}
         )
 
-        send_otp_email(mail, user['email'], otp)
+        send_otp_email(user['email'], otp)
         session['email'] = email
         return redirect(url_for('auth.verify_otp'))
 
@@ -46,6 +45,7 @@ def login():
 def verify_otp():
     from app import mongo
     from app import User
+
     email = session.get('email')
     if not email:
         return redirect(url_for('auth.login'))
@@ -60,4 +60,5 @@ def verify_otp():
             return redirect(url_for('main.index'))
         else:
             flash('Invalid or expired OTP', 'error')
+
     return render_template('verify_otp.html')
