@@ -8,7 +8,7 @@ auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    from app import mongo  # Avoid circular import
+    from app import mongo, mail
 
     if request.method == 'POST':
         action = request.form.get('action')
@@ -34,7 +34,9 @@ def login():
             {'$set': {'otp': otp, 'otp_expiry': otp_expiry}}
         )
 
-        send_otp_email(user['email'], otp)
+        # Send OTP via API-enabled send_otp_email
+        send_otp_email(mail, user['email'], otp)
+
         session['email'] = email
         return redirect(url_for('auth.verify_otp'))
 
